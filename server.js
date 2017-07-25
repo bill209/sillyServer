@@ -5,6 +5,7 @@ var app        = express();
 var bodyParser = require('body-parser');
 var router     = express.Router();
 
+/*
 if(process.env.MODE === 'prod'){
 	const DB = os.environ['DB'];
 	var dbInfo = {};
@@ -27,6 +28,7 @@ MongoClient.connect(URI, function(err, db) {
 	console.log('connected successfully to ' + dbInfo.DB);
 	db.close();
 });
+*/
 
 
 // bodyParser will let us get the data from a POST
