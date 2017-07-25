@@ -4,7 +4,7 @@ let MongoClient = require('mongodb').MongoClient;
 
 var dbInfo = {};
 
-if(process.env.MODE === 'prod'){
+if(process.env.MODE === 'prod' || true){
 	dbInfo.DB = process.env.DB;
 	dbInfo.DB = 'trains';  // temp requirement
 	dbInfo.PASS = process.env.PASS
@@ -14,6 +14,8 @@ if(process.env.MODE === 'prod'){
 	dbInfo     = require('./dbInfo.js');
 	var URI = 'mongodb://localhost:27017/sillydb';
 }
+
+console.log("URI",URI);
 
 let DB = {
 
