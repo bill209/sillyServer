@@ -5,7 +5,6 @@ var app        = express();
 var bodyParser = require('body-parser');
 var router     = express.Router();
 
-/*
 if(process.env.MODE === 'prod'){
 	const DB = os.environ['DB'];
 	var dbInfo = {};
@@ -17,6 +16,7 @@ if(process.env.MODE === 'prod'){
 }
 
 console.log("dbInfo.USER",dbInfo.USER);
+/*
 
 const URI = 'mongodb://' + dbInfo.USER + ':' + dbInfo.PASS + '@sillydb-shard-00-00-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-01-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-02-cmpur.gcp.mongodb.net:27017/' + dbInfo.DB + '?ssl=true&replicaSet=sillydb-shard-0&authSource=admin'
 
