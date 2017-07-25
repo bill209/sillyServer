@@ -6,6 +6,7 @@ var dbInfo = {};
 
 if(process.env.MODE === 'prod'){
 	dbInfo.DB = process.env.DB;
+	dbInfo.DB = 'trains';  // temp requirement
 	dbInfo.PASS = process.env.PASS
 	dbInfo.USER = process.env.USER;
 	var URI = 'mongodb://' + dbInfo.USER + ':' + dbInfo.PASS + '@sillydb-shard-00-00-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-01-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-02-cmpur.gcp.mongodb.net:27017/' + dbInfo.DB + '?ssl=true&replicaSet=sillydb-shard-0&authSource=admin'
@@ -13,8 +14,6 @@ if(process.env.MODE === 'prod'){
 	dbInfo     = require('./dbInfo.js');
 	var URI = 'mongodb://localhost:27017/sillydb';
 }
-
-console.log('URI: ', URI);
 
 let DB = {
 
