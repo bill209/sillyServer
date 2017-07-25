@@ -1,11 +1,11 @@
 // server.js
 // =============================================================================
-var express    = require('express');
-var app        = express();
-var bodyParser = require('body-parser');
-var router     = express.Router();
+var express     = require('express');
+var app         = express();
+var bodyParser  = require('body-parser');
+var router      = express.Router();
+var MongoClient = require('mongodb').MongoClient;
 
-console.log('***************', process.env.MODE);
 var dbInfo = {};
 if(process.env.MODE === 'prod'){
 	dbInfo.DB = process.env.DB;
@@ -14,19 +14,10 @@ if(process.env.MODE === 'prod'){
 } else {
 	dbInfo     = require('./db.js');
 }
-
-console.log("dbInfo.USER",dbInfo.USER);
-
 const URI = 'mongodb://' + dbInfo.USER + ':' + dbInfo.PASS + '@sillydb-shard-00-00-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-01-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-02-cmpur.gcp.mongodb.net:27017/' + dbInfo.DB + '?ssl=true&replicaSet=sillydb-shard-0&authSource=admin'
 
-
-var MongoClient = require('mongodb').MongoClient;
-
-var uri = "mongodb://kay:myRealPassword@mycluster0-shard-00-00-wpeiv.mongodb.net:27017,mycluster0-shard-00-01-wpeiv.mongodb.net:27017,mycluster0-shard-00-02-wpeiv.mongodb.net:27017/admin?ssl=true&replicaSet=Mycluster0-shard-0&authSource=admin";
+// connect to sillydb
 MongoClient.connect(URI, function(err, db) {
-	console.log('connected successfully to ' + dbInfo.DB);
-	console.log("db",db);
-
 	db.close();
 });
 
