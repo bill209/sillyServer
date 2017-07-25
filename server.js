@@ -5,6 +5,7 @@ var app        = express();
 var bodyParser = require('body-parser');
 var router     = express.Router();
 
+console.log('***************', process.env.MODE);
 /*
 if(process.env.MODE === 'prod'){
 	const DB = os.environ['DB'];
