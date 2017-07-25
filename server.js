@@ -15,7 +15,6 @@ if(process.env.MODE === 'prod'){
 	dbInfo     = require('./db.js');
 }
 
-/*
 console.log("dbInfo.USER",dbInfo.USER);
 
 const URI = 'mongodb://' + dbInfo.USER + ':' + dbInfo.PASS + '@sillydb-shard-00-00-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-01-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-02-cmpur.gcp.mongodb.net:27017/' + dbInfo.DB + '?ssl=true&replicaSet=sillydb-shard-0&authSource=admin'
@@ -28,7 +27,6 @@ MongoClient.connect(URI, function(err, db) {
 	console.log('connected successfully to ' + dbInfo.DB);
 	db.close();
 });
-*/
 
 
 // bodyParser will let us get the data from a POST
