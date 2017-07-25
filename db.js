@@ -14,6 +14,7 @@ if(process.env.MODE === 'prod'){
 	var URI = 'mongodb://localhost:27017/sillydb';
 }
 
+console.log('URI: ', URI);
 
 let DB = {
 
