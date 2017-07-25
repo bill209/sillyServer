@@ -11,9 +11,10 @@ if(process.env.MODE === 'prod'){
 	const URI = 'mongodb://' + dbInfo.USER + ':' + dbInfo.PASS + '@sillydb-shard-00-00-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-01-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-02-cmpur.gcp.mongodb.net:27017/' + dbInfo.DB + '?ssl=true&replicaSet=sillydb-shard-0&authSource=admin'
 } else {
 	dbInfo     = require('./dbInfo.js');
-	var URI = 'mongodb://localhost:27017/sillydb';
+	const URI = 'mongodb://localhost:27017/sillydb';
 }
 
+console.log("URI",URI);
 
 let DB = {
 
