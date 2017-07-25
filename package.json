@@ -1,0 +1,15 @@
+{
+  "name": "sillyserver",
+  "version": "1.0.0",
+  "description": "a compendium of restful services for sandbox programs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bill rowland",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3"
+  }
+}

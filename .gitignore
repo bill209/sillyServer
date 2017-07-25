@@ -1,0 +1,40 @@
+/polymer/bower_components/*
+jasmine-standalone-2.5.2
+ 
+# compiled output
+/bin
+/dist
+/tmp
+
+# karma
+karma/node_modules
+
+# dependencies
+node_modules
+
+# IDEs and editors
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+.idea
