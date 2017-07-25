@@ -1,6 +1,5 @@
-/polymer/bower_components/*
-jasmine-standalone-2.5.2
- 
+db.js
+
 # compiled output
 /bin
 /dist
