@@ -6,10 +6,8 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 var cors = require('cors');
 
-var MongoClient = require('mongodb').MongoClient;
 let DB = require('./db.js');
 let dbUtils = require('./dbUtils.js');
-
 
 var dbc = {};
 
@@ -22,12 +20,11 @@ DB.connect()
 			process.exit(1);
 		});
 
-
 // bodyParser will let us get the data from a POST
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-// allow cors access
+// allow CORS access
 app.use(cors());
 app.options('*', cors());
 
@@ -72,8 +69,6 @@ router.route('/railroads')
 		return new Promise((resolve, reject) => {
 			DB.getRailroads(dbc)
 				.then(function (railroads) {
-					console.log("railroads",railroads);
-					
 						resolve(res.json({railroads: railroads}));
 					},
 					function (err) {
