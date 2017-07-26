@@ -50,7 +50,47 @@ let DB = {
 				}
 			});
 		})
+	},
+
+	getRailroads: function(db){
+		return new Promise((resolve, reject) => {
+			var collection = db.collection('railroads');
+			collection.find({}).toArray(function(err, res) {
+				if(err) {
+					reject(err);
+				} else {
+					resolve(res);
+				}
+			});
+		})
+	},
+
+	insertCollection: function(db, coll, data){
+		return new Promise((resolve, reject) => {
+			var collection = db.collection(coll);
+			collection.insertMany(data, function(err,res){
+				if(err) {
+					reject(err);
+				} else {
+					resolve(res);
+				}
+			})
+		})
+	},
+	//  remove all documents in a collection
+	cleanCollection: function(db, coll){
+		return new Promise((resolve, reject) => {
+			var collection = db.collection(coll);
+			collection.deleteMany({_id : { $ne : -1} }, function(err,res){
+				if(err) {
+					reject(err);
+				} else {
+					resolve(res);
+				}
+			})
+		})
 	}
+
 
 }
 

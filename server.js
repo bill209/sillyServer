@@ -4,8 +4,12 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var router = express.Router();
+var cors = require('cors');
+
 var MongoClient = require('mongodb').MongoClient;
 let DB = require('./db.js');
+let dbUtils = require('./dbUtils.js');
+
 
 var dbc = {};
 
@@ -22,6 +26,10 @@ DB.connect()
 // bodyParser will let us get the data from a POST
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+// allow cors access
+app.use(cors());
+app.options('*', cors());
 
 var port = process.env.PORT || 8080;
 
@@ -45,7 +53,6 @@ router.get('/', function (req, res) {
 });
 
 router.route('/tools')
-
 // get all the tools (accessed at GET http://localhost:8080/api/tools)
 	.get(function (req, res) {
 		return new Promise((resolve, reject) => {
@@ -59,6 +66,19 @@ router.route('/tools')
 		});
 	});
 
+router.route('/railroads')
+// get all the railroads (accessed at GET http://localhost:8080/api/railroads)
+	.get(function (req, res) {
+		return new Promise((resolve, reject) => {
+			DB.getRailroads(dbc)
+				.then(function (tools) {
+						resolve(res.json({railroads: railroads}));
+					},
+					function (err) {
+						reject(err)
+					});
+		});
+	});
 
 // register the routes -------------------------------
 // all of our routes will be prefixed with /api
@@ -68,3 +88,23 @@ app.use('/api', router);
 // =============================================================================
 app.listen(port);
 console.log('Magic happens on port ' + port);
+
+
+// temporary routines
+/*
+ dbUtils.loadRailRoads(dbc)
+ .then(function(res){
+ console.log("inserted: " + res.n + ' records');
+ }, function(err){
+ console.log("err",err);
+ })
+ */
+
+/*
+ DB.cleanCollection(dbc, 'railroads')
+ .then(function(res){
+ console.log("deleted: " + res.result.n + ' records');
+ },function(err){
+ console.log("err",err);
+ })
+ */
