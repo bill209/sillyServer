@@ -71,7 +71,7 @@ router.route('/railroads')
 	.get(function (req, res) {
 		return new Promise((resolve, reject) => {
 			DB.getRailroads(dbc)
-				.then(function (tools) {
+				.then(function (railroads) {
 						resolve(res.json({railroads: railroads}));
 					},
 					function (err) {
