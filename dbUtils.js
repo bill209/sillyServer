@@ -1,3 +1,7 @@
+'use strict';
+
+// routines for db setup/maintenance
+
 var trainsData = require('./data/trains.js');
 var DB = require('./db.js');
 
@@ -12,10 +16,7 @@ var dbUtils =  {
 					reject(err);
 				})
 		})
-	},
-
-
+	}
 }
-
 
 module.exports = dbUtils;

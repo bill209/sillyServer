@@ -8,9 +8,10 @@ if(process.env.MODE === 'prod'){	// remote server and remote mongodb atlas
 	dbInfo.DB = process.env.DB;
 	dbInfo.PASS = process.env.PASS
 	dbInfo.USER = process.env.USER;
+
 	var URI = 'mongodb://' + dbInfo.USER + ':' + dbInfo.PASS + '@sillydb-shard-00-00-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-01-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-02-cmpur.gcp.mongodb.net:27017/' + dbInfo.DB + '?ssl=true&replicaSet=sillydb-shard-0&authSource=admin'
 } else {
-	if(true){  // run local server, remote mongodb atlas
+	if(false){  // run local server, remote mongodb atlas
 		dbInfo     = require('./dbInfo.js');
 		var URI = 'mongodb://' + dbInfo.USER + ':' + dbInfo.PASS + '@sillydb-shard-00-00-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-01-cmpur.gcp.mongodb.net:27017,sillydb-shard-00-02-cmpur.gcp.mongodb.net:27017/' + dbInfo.DB + '?ssl=true&replicaSet=sillydb-shard-0&authSource=admin'
 	} else {	// run local instance of server and db
@@ -56,7 +57,11 @@ let DB = {
 		return new Promise((resolve, reject) => {
 			var collection = db.collection('railroads');
 			collection.find({}).toArray(function(err, res) {
-				if(err) {
+				if(!err && res.length === 0){
+					console.log('ERROR');
+					reject({'message': 'no records found'});
+				} else if(err) {
+					console.log('REAL ERROR');
 					reject(err);
 				} else {
 					resolve(res);

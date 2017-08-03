@@ -1,3 +1,6 @@
+'use strict';
+// this data is now being pulled from mongoDb
+
 const trains =
 { "trains":
 	[

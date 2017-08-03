@@ -1,3 +1,5 @@
+'use strict';
+
 // server.js
 // =============================================================================
 var express = require('express');
@@ -7,7 +9,8 @@ var router = express.Router();
 var cors = require('cors');
 
 let DB = require('./db.js');
-let dbUtils = require('./dbUtils.js');
+//	used for db setup
+//	let dbUtils = require('./dbUtils.js');
 
 var dbc = {};
 
@@ -50,7 +53,7 @@ router.get('/', function (req, res) {
 });
 
 router.route('/tools')
-// get all the tools (accessed at GET http://localhost:8080/api/tools)
+// get all the tools (accessed at GET /api/tools)
 	.get(function (req, res) {
 		return new Promise((resolve, reject) => {
 			DB.getTools(dbc)
@@ -58,23 +61,22 @@ router.route('/tools')
 						resolve(res.json({tools: tools}));
 					},
 					function (err) {
-						reject(err)
+						reject(res.send(err))
 					});
 		});
 	});
 
 router.route('/railroads')
-// get all the railroads (accessed at GET http://localhost:8080/api/railroads)
+// get all the railroads (accessed at GET /api/railroads)
 	.get(function (req, res) {
-		return new Promise((resolve, reject) => {
-			DB.getRailroads(dbc)
-				.then(function (railroads) {
-						resolve(res.json({railroads: railroads}));
-					},
-					function (err) {
-						reject(err)
-					});
-		});
+		DB.getRailroads(dbc)
+			.then(function (railroads) {
+					return(res.json({railroads: railroads}));
+				},
+				function (err) {
+					console.log('server.js ERR: ', err);
+					return(res.send(err))
+				});
 	});
 
 // register the routes -------------------------------
@@ -85,23 +87,3 @@ app.use('/api', router);
 // =============================================================================
 app.listen(port);
 console.log('Magic happens on port ' + port);
-
-
-// temporary routines
-/*
- dbUtils.loadRailRoads(dbc)
- .then(function(res){
- console.log("inserted: " + res.n + ' records');
- }, function(err){
- console.log("err",err);
- })
- */
-
-/*
- DB.cleanCollection(dbc, 'railroads')
- .then(function(res){
- console.log("deleted: " + res.result.n + ' records');
- },function(err){
- console.log("err",err);
- })
- */
